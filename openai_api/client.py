@@ -1,26 +1,18 @@
-from openai import OpenAI
+import os
+import google.generativeai as genai
 
-client = OpenAI(
-    api_key='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'
-)
+#Caso o usuário não preencha a Bio ao cadastrar novo carro, a bio é preenchida automaticamente atraves da IA
 
+#A chave API fica na variável de ambiente chamada API_KEY.
 
-def get_car_ai_bio(model, brand, year):
-    message = ''''
-    Me mostre uma descrição de venda para o carro {} {} {} em apenas 250 caracteres. Fale coisas específicas        
-    '''
-    message = message.format(brand, model, year)
-    response = client.chat.completions.create(
-        
-        messages = [
-            {
-                'role': 'user',
-                'content':  message
-                          
-            }
+API_KEY = os.environ.get('API_KEY') 
 
-        ],
-        max_tokens=1000,
-        model='gpt-3.5-turbo',
-    )
-    return response.choices[0].message.content
+genai.configure(api_key=API_KEY)
+model = genai.GenerativeModel('gemini-pro')
+
+def get_car_ai_bio(model_name, brand, year):
+    prompt = f'Faca uma descricao de venda para o carro {brand} {model_name} {year} em apenas 200 caracteres'
+    
+    response = model.generate_content(prompt)
+
+    return response.text
