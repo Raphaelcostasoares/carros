@@ -3,7 +3,7 @@ import google.generativeai as genai
 
 #Caso o usuário não preencha a Bio ao cadastrar novo carro, a bio é preenchida automaticamente atraves da IA
 
-#A chave API fica na variável de ambiente chamada API_KEY.
+#A chave API fica na variável de ambiente chamada
 
 API_KEY = os.environ.get('API_KEY') 
 
