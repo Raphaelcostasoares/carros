@@ -6,7 +6,7 @@ import google.generativeai as genai
 
 #A chave API fica na variável de ambiente chamada.
 
-API_KEY = os.environ.get('AIzaSyBIDYA7i4IQCpb17e2992YN03dElGxd62w') 
+API_KEY = os.environ.get('API_KEY') 
 
 genai.configure(api_key=API_KEY)
 model = genai.GenerativeModel('gemini-pro')
